@@ -14,7 +14,6 @@ else:
     from socketserver import ThreadingMixIn, TCPServer, StreamRequestHandler
 
 logger = logging.getLogger(__name__)
-logging.basicConfig()
 
 '''
 +-+-+-+-+-------+-+-------------+-------------------------------+
@@ -104,8 +103,6 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
         host(str): Hostname or IP to listen for connections. By default 127.0.0.1
             is being used. To accept connections from any client, you should use
             0.0.0.0.
-        loglevel: Logging level from logging module to use for logging. By default
-            warnings and errors are being logged.
 
     Properties:
         clients(list): A list of connected clients. A client is a dictionary
@@ -123,8 +120,7 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
     clients = []
     id_counter = 0
 
-    def __init__(self, port, host='127.0.0.1', loglevel=logging.WARNING):
-        logger.setLevel(loglevel)
+    def __init__(self, port, host='127.0.0.1'):
         self.port = port
         TCPServer.__init__(self, (host, port), WebSocketHandler)
 

@@ -1,5 +1,9 @@
 from websocket_server import WebsocketServer
 
+import logging
+
+logging.basicConfig(loglevel=logging.INFO)
+
 # Called for every client connecting (after handshake)
 def new_client(client, server):
 	print("New client connected and was given id %d" % client['id'])
