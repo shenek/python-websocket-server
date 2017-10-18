@@ -128,10 +128,12 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
         self.message_received(self.handler_to_client(handler), self, msg)
 
     def _ping_received_(self, handler, msg):
+        logger.debug("Ping was recieved from client %d." % self.handler_to_client(handler)["id"])
         handler.send_pong(msg)
+        logger.debug("Pong was sent to client %d." % self.handler_to_client(handler)["id"])
 
     def _pong_received_(self, handler, msg):
-        pass
+        logger.debug("Pong was recieved from client %d." % self.handler_to_client(handler)["id"])
 
     def _new_client_(self, handler):
         self.id_counter += 1
